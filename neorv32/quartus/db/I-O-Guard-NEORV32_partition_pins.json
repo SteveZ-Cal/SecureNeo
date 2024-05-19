@@ -1,0 +1,145 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "gpio_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_o[7]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_0_o[7]",
+					"strict" : false
+				},
+				{
+					"name" : "jtag_tdo_o",
+					"strict" : false
+				},
+				{
+					"name" : "uart0_txd_o",
+					"strict" : false
+				},
+				{
+					"name" : "clk_i",
+					"strict" : false
+				},
+				{
+					"name" : "rstn_i",
+					"strict" : false
+				},
+				{
+					"name" : "jtag_tck_i",
+					"strict" : false
+				},
+				{
+					"name" : "jtag_trst_i",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[1]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[0]",
+					"strict" : false
+				},
+				{
+					"name" : "jtag_tms_i",
+					"strict" : false
+				},
+				{
+					"name" : "jtag_tdi_i",
+					"strict" : false
+				},
+				{
+					"name" : "SW9",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[6]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[5]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[4]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[3]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[2]",
+					"strict" : false
+				},
+				{
+					"name" : "gpio_1_i[7]",
+					"strict" : false
+				},
+				{
+					"name" : "uart0_rxd_i",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

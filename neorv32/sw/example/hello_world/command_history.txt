@@ -1,0 +1,1000 @@
+ 1002  sudo apt upgrate
+ 1003  sudo apt upgrade
+ 1004  wget https://apt.kitware.com/kitware-archive.sh
+ 1005  sudo bash kitware-archive.sh
+ 1006  sudo apt install --no-install-recommends git cmake ninja-build gperf   ccache dfu-util device-tree-compiler wget   python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
+ 1007  sudo apt install --no-install-recommends git cmake ninja-build gperf   ccache dfu-util device-tree-compiler wget   python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file   make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+ 1008  sudo apt install python3-venv
+ 1009  python3 -m venv ~/zephyrproject/.venv
+ 1010  source ~/zephyrproject/.venv/bin/activate
+ 1011  deactivate
+ 1012  source ~/zephyrproject/.venv/bin/activate
+ 1013  pip install west
+ 1014  ls
+ 1015  rm kitware-archive.sh.1
+ 1016  ls
+ 1017  west init ~/zephyrproject
+ 1018  cd ~/zephyrproject
+ 1019  west update
+ 1020  west zephyr-export
+ 1021  pip install -r ~/zephyrproject/zephyr/scripts/requirements.txt
+ 1022  cd ~
+ 1023  wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.1/zephyr-sdk-0.16.1_linux-x86_64.tar.xz
+ 1024  wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.1/sha256.sum | shasum --check --ignore-missing
+ 1025  tar xvf zephyr-sdk-0.16.1_linux-x86_64.tar.xz
+ 1026  cd zephyr-sdk-0.16.1
+ 1027  ./setup.sh
+ 1028  sudo cp ~/zephyr-sdk-0.16.1/sysroots/x86_64-pokysdk-linux/usr/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+ 1029  sudo udevadm control --reload
+ 1030  cd ~/zephyrproject/zephyr
+ 1031  west build -p always -b <your-board-name> samples/basic/blinky
+ 1032  west build -b neorv32 samples/hello_world
+ 1033  pip install cmake --upgrade
+ 1034  west build -b neorv32 samples/hello_world
+ 1035  west flash
+ 1036  # From the root of the zephyr repository
+ 1037  west build -b neorv32 samples/hello_world -- -DBOARD_RUNNER_ARGS_openocd="--config;interface/ftdi/flyswatter.cfg;--config;neorv32.cfg;--cmd-pre-init;'adapter speed 2000'"
+ 1038  west flash
+ 1039  # From the root of the zephyr repository
+ 1040  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1041  west flash
+ 1042  ls
+ 1043  cd neorv32
+ 1044  ls
+ 1045  cd sw
+ 1046  ls
+ 1047  cd image_gen
+ 1048  pwd
+ 1049  echo $PATH
+ 1050  cd
+ 1051  code .bashrc
+ 1052  ls
+ 1053  cd neorv32
+ 1054  ls
+ 1055  cd sw/example
+ 1056  cd ReSWATT
+ 1057  ls
+ 1058  cd zephyrproject
+ 1059  ls
+ 1060  cd zephr
+ 1061  cd zephyr
+ 1062  ls
+ 1063  west build -b neorv32 samples/hello_world
+ 1064  echo $PATH
+ 1065  west flash
+ 1066  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1067  source ~/zephyrproject/.venv/bin/activate
+ 1068  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1069  west falsh
+ 1070  west flash
+ 1071  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1072  west debug
+ 1073  ls
+ 1074  cd zephyrproject
+ 1075  ls
+ 1076  cd zephr
+ 1077  ls
+ 1078  cd zephyr
+ 1079  ls
+ 1080  cd boards
+ 1081  ls
+ 1082  cd riscv
+ 1083  ls
+ 1084  cd neorv32
+ 1085  ls
+ 1086  cd support
+ 1087  ls
+ 1088  cd ..
+ 1089  cd
+ 1090  python3 -m venv ~/zephyrproject/.venv
+ 1091  ls
+ 1092  cd zephyproject
+ 1093  cd zephyrproject
+ 1094  ls
+ 1095  cd zephyr
+ 1096  source ~/zephyrproject/.venv/bin/activate
+ 1097  cd
+ 1098  cd ~
+ 1099  cd -
+ 1100  cd /zephyrproject/zephyr
+ 1101  cd zephyrproject/zephyr
+ 1102  ls
+ 1103  ls -al
+ 1104  cd
+ 1105  cd ..
+ 1106  cd
+ 1107  cd zephyrproject
+ 1108  ls -al
+ 1109  cd .venv
+ 1110  ls
+ 1111  cd ..
+ 1112  deactivate
+ 1113  ls -al
+ 1114  source .venv/bin/activate
+ 1115  deactivate
+ 1116  source venv/bin/actiivate
+ 1117  source .venv/bin/activate
+ 1118  python -m pip list
+ 1119  python -m pip freeze > requirements.rxt
+ 1120  west boards
+ 1121  ls
+ 1122  cd zephyr
+ 1123  ls
+ 1124  west build -h
+ 1125  west buid -b neorv32 -t run samples/hello_world
+ 1126  west build -b neorv32 -t run samples/hello_world
+ 1127  west build -t help
+ 1128  west build -b neorv32 samples/hello_world
+ 1129  west build -t run
+ 1130  west build -b qemu_x86 -t run samples/hello_world
+ 1131  west config 
+ 1132  west build -t run
+ 1133  west build -b qemu_neorv32 samples/hello_world
+ 1134  west build -p -b qemu_x86 -t run samples/hello_world
+ 1135  west build -b qemu_x86 -t run samples/philosophers
+ 1136  west build -p -b qemu_x86 -t run samples/philosophers
+ 1137  west build -p -b qemu_x86 -t run samples/hello_world
+ 1138  west build -p -b qemu_riscv32 -t run samples/hello_world
+ 1139  west build -p -b neorv32 -t run samples/hello_world
+ 1140  west build -p -b neorv32 samples/hello_world
+ 1141  west build -t run
+ 1142  history
+ 1143  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1144  west debug
+ 1145  west build -p -b qemu_x86 -t run samples/philosophers
+ 1146  ls
+ 1147  cd zephyrproject
+ 1148  ls
+ 1149  source ~/zephyrproject/.venv/bin/activate
+ 1150  ls
+ 1151  cd zephyr
+ 1152  ls
+ 1153  west build -b neorv32 samples/hello_world -- -DCMAKE_PROGRAM_PATH=../../neorv32/sw/image_gen/
+ 1154  west build -p -b qemu_x86 -t run samples/philosophers
+ 1155  west build -p -b qemu_x86 samples/philosophers
+ 1156  west build -t rom_report
+ 1157  west build -p -b neorv32 samples/philosophers
+ 1158  west build -t rom_report
+ 1159  west build -t ram_report
+ 1160  pip3 install git+https://github.com/HBehrens/puncover --user
+ 1161  cd ..
+ 1162  pip3 install git+https://github.com/HBehrens/puncover --user
+ 1163  pip3 install git+https://github.com/HBehrens/puncover
+ 1164  west build -t puncover
+ 1165  ls
+ 1166  cd zephyr
+ 1167  ls
+ 1168  west build -t puncover
+ 1169  pip3 install git+https://github.com/HBehrens/puncover
+ 1170  sudo apt-get install dwarves
+ 1171  west build -t pahole
+ 1172  west build -p -b neorv32 samples/philosophers
+ 1173  west build -t pahole
+ 1174  less west build -t pahole
+ 1175  west build -p -b neorv32 samples/hello_world
+ 1176  less west build -t pahole
+ 1177  west build -t pahole
+ 1178  west build -t ram_report
+ 1179  west build -t rom_report
+ 1180  df -h
+ 1181  df -h --total
+ 1182  ls
+ 1183  cd Downloads/
+ 1184  ls
+ 1185  sudo dpkg -i code_l.81.1-1691620686_amd64.deb
+ 1186  sudo dpkg -i code_1.81.1-1691620686_amd64.deb
+ 1187  code
+ 1188  ls
+ 1189  cd
+ 1190  ls
+ 1191  df -h
+ 1192  df -h --total
+ 1193  ls
+ 1194  cd zephyrproject
+ 1195  ls
+ 1196  cd zephytr
+ 1197  zephyr
+ 1198  cd zephyr
+ 1199  source ~/zephyrproject/.venv/bin/activate
+ 1200  west build -b qemu_x86 samples/hello_world
+ 1201  west build -b -p qemu_x86 samples/hello_world
+ 1202  west build -t ram_report
+ 1203  west build -p -b neorv32 samples/hello_world
+ 1204  west build -p -b qmeu_riscv samples/hello_world
+ 1205  west build -p -b neorv32 samples/hello_world
+ 1206  west build -p -b qemu_riscv32 samples/hello_world
+ 1207  west build -t run
+ 1208  cd
+ 1209  west build -p -b qemu_riscv32 samples/hello_world
+ 1210  cd zephyrproject
+ 1211  ls
+ 1212  cd zephyr
+ 1213  west build -p -b qemu_riscv32 samples/hello_world
+ 1214  cd ..
+ 1215  west build -p -b qemu_riscv32 samples/hello_world
+ 1216  cd zephyr
+ 1217  west build -p -b qemu_riscv32 samples/hello_world
+ 1218  west build -t run
+ 1219  west build -p -b neorv32 samples/hello_world]
+ 1220  west build -p -b neorv32 samples/hello_world
+ 1221  west flash
+ 1222  west build -t flash
+ 1223  west build -t run
+ 1224  west build -p -b qemu_x86 samples/userspace/shared_mem
+ 1225  west build -t run
+ 1226  west build -p -b qemu_x86 samples/arch/mpu/mpu_test
+ 1227  west build -t run
+ 1228  west build -p -b neorv32 samples/hello_world
+ 1229  west build -p -b neorv32 samples/hello_world --cmake-only
+ 1230  ls
+ 1231  cd zephyproject
+ 1232  cd zephyrporject
+ 1233  clear
+ 1234  ls
+ 1235  cd zephyrproject
+ 1236  source ~/zephyrproject/.venv/bin/activate
+ 1237  ls
+ 1238  source ~/zephyrproject/.venv/bin/activate
+ 1239  ls
+ 1240  cd zephyrproject
+ 1241  ls
+ 1242  cd zephyr
+ 1243  ls
+ 1244  source ~/zephyrproject/.venv/bin/activate
+ 1245  ls
+ 1246  cd zephyrproject
+ 1247  ls
+ 1248  zephyr
+ 1249  cd zephye
+ 1250  cd zephyr
+ 1251  ls
+ 1252  west build -p -b neorv32 samples/hello_world
+ 1253  west flash
+ 1254  west flahs
+ 1255  west flash
+ 1256  west debug
+ 1257  ls
+ 1258  cd neorv32
+ 1259  ls -al
+ 1260  git branch
+ 1261  git status
+ 1262  git add .
+ 1263  git status
+ 1264  git commit -m "demo_freeRTOS minor changed"
+ 1265  git status
+ 1266  git remote add origin https://github.com/SteveZ-Cal/SURP_2023_HybridAttestation.git
+ 1267  git checkout main
+ 1268  git branch
+ 1269  git checkout CPU_TIME_TESTING_5
+ 1270  git push -u origin CPU_TIME_TESTING_5
+ 1271  git config
+ 1272  git remote -v
+ 1273  git remote rm stevez
+ 1274  git remote -v
+ 1275  git remote add stevez https://github.com/SteveZ-Cal/SURP_2023_HybridAttestation.git
+ 1276  git remote -v
+ 1277  git push --set-upstream stevez CPU_TIME_TESTING_5
+ 1278  git branch
+ 1279  git push --set-upstream stevez Hybrid_Software_Attestation_Testing_4
+ 1280  git push --set-upstream stevez Hybrid_Attestation_Testing_3
+ 1281  git push stevez Hybrid_Attestation_2 ReSWATT
+ 1282  Software_Attestation_
+ 1283  git push -u stevez Software_Attestation_1
+ 1284  git remote -v
+ 1285  git branch
+ 1286  git checkout main
+ 1287  git branchf
+ 1288  git branch
+ 1289  git pull origin main
+ 1290  git branch
+ 1291  git checkout CPU_TIME_TESTING_5
+ 1292  ls
+ 1293  cd neorv32
+ 1294  git branch
+ 1295  git checkout main
+ 1296  git branch
+ 1297  cd sw
+ 1298  cd example
+ 1299  ls
+ 1300  cd demo_blink_led
+ 1301  ls
+ 1302  cd .. 
+ 1303  cd ..
+ 1304  git branch
+ 1305  git branch FPGA_Setup
+ 1306  git branch
+ 1307  git branch -m FPGA_Setup FPGA_Setup_6
+ 1308  git checkout
+ 1309  git branch
+ 1310  git checkout FPGA_Setup_6
+ 1311  git branch
+ 1312  cd sw
+ 1313  ls
+ 1314  cd example
+ 1315  ls
+ 1316  cd demo_blink_led
+ 1317  ls
+ 1318  make clean_all exe
+ 1319  git push -u stevez FPGA_Setup_6
+ 1320  make clean_all install
+ 1321  ls
+ 1322  cd neorv32
+ 1323  ls
+ 1324  cd sw
+ 1325  cd example
+ 1326  ls
+ 1327  git branch
+ 1328  cd demo_blink_led
+ 1329  ls
+ 1330  make clean_all install
+ 1331  git status
+ 1332  git branch
+ 1333  git add .
+ 1334  git status
+ 1335  cd 
+ 1336  cd neorv32
+ 1337  git status
+ 1338  git add .
+ 1339  git branch
+ 1340  git push stevez -u FPGA_Setup_6
+ 1341  git push stevez FPGA_Setup_6
+ 1342  git branch
+ 1343  git status
+ 1344  git commit
+ 1345  git commit -m ""
+ 1346  git commit -m "demo_blink_led change"
+ 1347  git push stevez FPGA_Setup_6
+ 1348  cd sw
+ 1349  cd example
+ 1350  ls
+ 1351  cd demo_blink_lked
+ 1352  cd demo_blink_led
+ 1353  ls
+ 1354  make clean_all install
+ 1355  make clean_all exe
+ 1356  make clean_all install
+ 1357  cd
+ 1358  cd neorv32
+ 1359  ls
+ 1360  git status
+ 1361  git add .
+ 1362  git status
+ 1363  git commit -m "demo_blink_led change"
+ 1364  git push stevez FPGA_Setup_6
+ 1365  cd
+ 1366  cd neorv32/sw/example
+ 1367  ls
+ 1368  cd demo_blink_led
+ 1369  ls
+ 1370  cd ...
+ 1371  cd ..
+ 1372  cd demo_freeRTOS
+ 1373  ls
+ 1374  make clean_all install
+ 1375  make USER_FLAGS+=-DRUN_FREERTOS_DEMO clean_all install
+ 1376  cd
+ 1377  ls
+ 1378  cd zephyrproject
+ 1379  ls
+ 1380  cd zephyr
+ 1381  ls
+ 1382  source ~/zephyrproject/.venv/bin/activate
+ 1383  west build -b neorv32 samples/hello_world
+ 1384  west flash
+ 1385  ls
+ 1386  cd neorv32
+ 1387  cd
+ 1388  cd neorv32
+ 1389  decativate
+ 1390  deactivate
+ 1391  ls
+ 1392  cd sw/example
+ 1393  ls
+ 1394  cd demo_blink_led
+ 1395  ls
+ 1396  make clean_all install
+ 1397  make clean_all exe
+ 1398  make USER_FLAGS+="-Wl, --defsym,_neorv32_rom_size=16k" clean_all exe
+ 1399  make USER_FLAGS+="-Wl,--defsym,__neorv32_rom_size=16k" clean_all exe
+ 1400  make clean_all exe
+ 1401  ls
+ 1402  cd neorv32
+ 1403  ls
+ 1404  cd sw
+ 1405  ls
+ 1406  cd example
+ 1407  ls
+ 1408  cd demo_blink_led
+ 1409  cd ..
+ 1410  ls
+ 1411  cd bootloade
+ 1412  cd bootloader
+ 1413  ls
+ 1414  make clean_all install
+ 1415  make clean_all exe
+ 1416  make clean_all install
+ 1417  make clean_all bootloader
+ 1418  make clean_all bootloader
+ 1419  cd ..
+ 1420  cd example
+ 1421  ls
+ 1422  cd demo_blink_led
+ 1423  make clean_all exe
+ 1424  cd ..
+ 1425  ls
+ 1426  cd bootloader
+ 1427  ls
+ 1428  make clean_all bootloader
+ 1429  git branch
+ 1430  cd ..
+ 1431  ls
+ 1432  cd example
+ 1433  cd demo_blink_led
+ 1434  ls
+ 1435  make clean_all exe
+ 1436  make clean_all install
+ 1437  make clean_all iexe
+ 1438  make clean_all exe
+ 1439  cd ..
+ 1440  ls
+ 1441  cd bootloader
+ 1442  ls
+ 1443  make clean_all bootloader
+ 1444  ls
+ 1445  cd neorv32
+ 1446  ls
+ 1447  cd sw
+ 1448  cd example
+ 1449  ls
+ 1450  cd demo_blink_led
+ 1451  ls
+ 1452  make USER_FLAGS+=-DUART0_SIM_MODE clean_all all
+ 1453  make USER_FLAGS+=-DUART0_SIM_MODE clean_all sim
+ 1454  make USER_FLAGS+=-DUART0_SIM_MODE_zsirc clean_all sim
+ 1455  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim > result.txt
+ 1456  ls
+ 1457  cd neorv32
+ 1458  ls
+ 1459  cd sw
+ 1460  ls
+ 1461  cd bootloader
+ 1462  ls
+ 1463  make clean_all bootloader
+ 1464  cd ..
+ 1465  ls
+ 1466  cd example
+ 1467  ls
+ 1468  cd demo_blink_led
+ 1469  ls
+ 1470  make clean_all install
+ 1471  make clean_all exe
+ 1472  make clean_all install
+ 1473  make clean_all
+ 1474  ls
+ 1475  cd neorv32
+ 1476  ls
+ 1477  cd sw
+ 1478  cd example
+ 1479  ls
+ 1480  cd demo_blink_led
+ 1481  make clean_all exe
+ 1482  ls
+ 1483  cd neorv32
+ 1484  ls
+ 1485  cd sw
+ 1486  cd example
+ 1487  ls
+ 1488  cd demo_blink_led
+ 1489  cd ..
+ 1490  ls
+ 1491  cd bootloader
+ 1492  ls
+ 1493  make clean_all
+ 1494  ls
+ 1495  make clean_all bootloader
+ 1496  cd ..
+ 1497  ls
+ 1498  cd sw
+ 1499  ls
+ 1500  cd example
+ 1501  ls
+ 1502  cd demo_blink_led
+ 1503  ls
+ 1504  make clean_all exe
+ 1505  cd ..
+ 1506  ls
+ 1507  cd .
+ 1508  cd ..
+ 1509  ls
+ 1510  cd bootloader
+ 1511  ls
+ 1512  make clean_all bootloader
+ 1513  cd ..
+ 1514  ls
+ 1515  cd sw
+ 1516  cd example
+ 1517  ls
+ 1518  cd demo_blink_led
+ 1519  ls
+ 1520  history > history.txt
+ 1521  ls
+ 1522  cd neorv32
+ 1523  ls
+ 1524  cd sw/example
+ 1525  ls
+ 1526  cd demo_blink_led
+ 1527  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim > result.txt
+ 1528  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim
+ 1529  ls
+ 1530  cd neorv32
+ 1531  ls
+ 1532  cd sw/example
+ 1533  ls
+ 1534  cd demo_blink_led
+ 1535  make USER_FLAGS+=-DUART0_SIM_MODE clean_all sim
+ 1536  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim
+ 1537  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc clean_all sim
+ 1538  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_ziscr clean_all sim
+ 1539  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim
+ 1540  cd ..
+ 1541  ls
+ 1542  cd hello_world
+ 1543  ls
+ 1544  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_ziscr clean_all sim
+ 1545  make USER_FLAGS+=-DUART0_SIM_MODE MARCH=rv32imc_zicsr clean_all sim
+ 1546  cd ..
+ 1547  ls
+ 1548  cd bootloader
+ 1549  ls
+ 1550  make clean_all bootloader
+ 1551  cd ..
+ 1552  ls
+ 1553  cd example
+ 1554  ls
+ 1555  cd hello_world
+ 1556  ls
+ 1557  make clean_all exe
+ 1558  ls
+ 1559  cd neorv32/sw/example/hello_world
+ 1560  ls
+ 1561  make clean_all exe
+ 1562  cd neorv32/sw/example/hello_world
+ 1563  ls
+ 1564  cd
+ 1565  ls
+ 1566  cd zephyrproject
+ 1567  source ~/zephyrproject/.venv/bin/activate
+ 1568  ls
+ 1569  cd zephyr
+ 1570  ls
+ 1571  west build -b neorv32 samples/hello_world
+ 1572  west build -t ram_report
+ 1573  west build -t rom_report
+ 1574  ls
+ 1575  source ~/zephyrproject/.venv/bin/activate
+ 1576  cd zephyrproject
+ 1577  ls
+ 1578  cd zephyr
+ 1579  ls
+ 1580  west build -t ram_report
+ 1581  west build -t rom_report
+ 1582  history 
+ 1583  git branch
+ 1584  git status
+ 1585  git fetch origin
+ 1586  git branch stevez
+ 1587  git branch
+ 1588  git branch fatemeh
+ 1589  git branch
+ 1590  git branch main_stevez
+ 1591  git branch
+ 1592  git git branch -d main_stevez
+ 1593  git branch -d main_stevez
+ 1594  git branch
+ 1595  git branch -m stevez main_stevez
+ 1596  git branch
+ 1597  git branch -m fatemeh main_fatemeh
+ 1598  git branch
+ 1599  git remote -v
+ 1600  git branch
+ 1601  git remote add origin https://github.com/SteveZ-Cal/Zephyr_NEORV32.git
+ 1602  git remote add remote_stevez https://github.com/SteveZ-Cal/Zephyr_NEORV32.git
+ 1603  git remote -v
+ 1604  git push -u remote_stevez main
+ 1605  git push -u remote_stevez main_stevez
+ 1606  git branch
+ 1607  git push -u remote_stevez main_fatemeh
+ 1608  git checkout main_stevez
+ 1609  git branch
+ 1610  cd ..
+ 1611  git branch
+ 1612  ls
+ 1613  cd zephyr
+ 1614  git branc
+ 1615  git branch
+ 1616  west build -b neorv32 samples/hello_world
+ 1617  west build -p -b qemu_riscv samples/hello_world
+ 1618  west build -p -b qemu_riscv32 samples/hello_world
+ 1619  west build -t run
+ 1620  echo $PATH
+ 1621  west build -p -b neorv32 samples/hello_world
+ 1622  source ~/zephyrproject/.venv/bin/activate
+ 1623  ls
+ 1624  cd zephyrproject/zephyr
+ 1625  ls
+ 1626  git branch
+ 1627  west build -t rom_report
+ 1628  west build -p -b neorv32 samples/philosophers
+ 1629  source ~/zephyrproject/.venv/bin/activate
+ 1630  cd zephyrproject/zephyr
+ 1631  west build -t rom_report
+ 1632  west build -p -b neorv32 samples/hello_world
+ 1633  west build -t rom_report
+ 1634  west build -p -b neorv32 samples/basic/blinky
+ 1635  source ~/zephyrproject/.venv/bin/activate
+ 1636  cd zephyrproject/zephyr
+ 1637  west build -p -b neorv32 samples/hello_world
+ 1638  source ~/zephyrproject/.venv/bin/activate
+ 1639  cd zephyrproject/zephyr
+ 1640  git branch
+ 1641  west build -p -b neorv32 samples/hello_world
+ 1642  source ~/zephyrproject/.venv/bin/activate
+ 1643  cd zephyrproject/zephyr
+ 1644  west build -p -b neorv32 samples/hello_world
+ 1645  source ~/zephyrproject/.venv/bin/activate
+ 1646  cd zephyrproject/zephyr
+ 1647  west build -t rom_report
+ 1648  source ~/zephyrproject/.venv/bin/activate
+ 1649  cd zephyrproject/zephyr
+ 1650  west build -t rom_report
+ 1651  west build -p -b neorv32 samples/hello_world
+ 1652  west flash
+ 1653  west build -p -b neorv32 samples/hello_world
+ 1654  west build -p -b neorv32 samples/basic/blinky
+ 1655  source ~/zephyrproject/.venv/bin/activate
+ 1656  cd zephyrproject/zephyr
+ 1657  west build -t rom_report
+ 1658  west build -p -b neorv32 samples/basic/blinky
+ 1659  source ~/zephyrproject/.venv/bin/activate
+ 1660  cd zephyrproject/zephyr
+ 1661  west build -p -b neorv32 samples/hello_world
+ 1662  source ~/zephyrproject/.venv/bin/activate
+ 1663  cd zephyrproject/zephyr
+ 1664  west build -p -b neorv32 samples/hello_world
+ 1665  source ~/zephyrproject/.venv/bin/activate
+ 1666  cd zephyrproject/zephyr
+ 1667  west build -p -b neorv32 samples/hello_world
+ 1668  source ~/zephyrproject/.venv/bin/activate
+ 1669  cd zephyrproject/zephyr
+ 1670  west build -p -b neorv32 samples/hello_world
+ 1671  west build -p -b neorv32 samples/userspace/hello_world_user
+ 1672  cd zephyrproject/zephyr
+ 1673  source ~/zephyrproject/.venv/bin/activate
+ 1674  git branch
+ 1675  git status
+ 1676  git add .
+ 1677  git checkout main
+ 1678  git checkout main_stevez
+ 1679  git status
+ 1680  git checkout main
+ 1681  git branch
+ 1682  git checkout main_stevez
+ 1683  west build -p -b neorv32 samples/hello_world
+ 1684  ls
+ 1685  cd neorv32
+ 1686  ls
+ 1687  cd sw/example
+ 1688  ls
+ 1689  cd demo_blink_led
+ 1690  cd ..
+ 1691  cd hello_world
+ 1692  ls
+ 1693  make clean_all exe
+ 1694  ls
+ 1695  cd neorv32/sw/example/
+ 1696  ls
+ 1697  cd hello_world
+ 1698  git branch
+ 1699  git branch -m FPGA_Setup_6 FPGA_Setup_1.8.9_6
+ 1700  git branch
+ 1701  git status
+ 1702  cd
+ 1703  cd neorv32 
+ 1704  git status
+ 1705  git add .
+ 1706  git status
+ 1707  git checkout main
+ 1708  git status
+ 1709  git commit -m "FPGA_Setup with version 1.8.9"
+ 1710  git status
+ 1711  git checkout main
+ 1712  cd neorv32
+ 1713  ls
+ 1714  git branch
+ 1715  git branch FPGA_Setup_1.8.6_7
+ 1716  git branch
+ 1717  git checkout FPGA_Setup_1.8.6_7
+ 1718  git branch
+ 1719  git commit 
+ 1720  git history
+ 1721  git --help
+ 1722  git log
+ 1723  cd sw/example
+ 1724  ls
+ 1725  cd hello_world
+ 1726  ls
+ 1727  git log > commit_history
+ 1728  git log > commit_history.txt
+ 1729  ls
+ 1730  cd neorv32/sw/example
+ 1731  ls
+ 1732  cd hello_world
+ 1733  git branch
+ 1734  git reset e736259b
+ 1735  git branch
+ 1736  git log
+ 1737  git branch main
+ 1738  git status
+ 1739  git branch
+ 1740  git checkout main
+ 1741  git status
+ 1742  cd
+ 1743  cd neorv32
+ 1744  git branch
+ 1745  git status
+ 1746  git add .
+ 1747  git log
+ 1748  git branch main
+ 1749  git checkout main
+ 1750  git log
+ 1751  git branch
+ 1752  git checkout FPGA_Setup_1.8.6_7
+ 1753  git log
+ 1754  cd sw/example
+ 1755  ls
+ 1756  cd hello_world
+ 1757  ls
+ 1758  make clean_all exe
+ 1759  git status
+ 1760  git log
+ 1761  cd neorv32/sw/example/hello_world
+ 1762  ls
+ 1763  cd ..
+ 1764  ls
+ 1765  cd demo_blink_led
+ 1766  ls
+ 1767  make clean_all exe
+ 1768  cd neorv32/sw/example/demo_blink_led
+ 1769  ls
+ 1770  cd
+ 1771  source ~/zephyrproject/.venv/bin/activate
+ 1772  cd zephyrproject/zephyr
+ 1773  west build -p -b neorv32 samples/philosophers
+ 1774  west build -p -b neorv32 samples/basic/blinky
+ 1775  git branch
+ 1776  cd
+ 1777  ls
+ 1778  cd zephyrproject
+ 1779  source ~/zephyrproject/.venv/bin/activate
+ 1780  cd zephyrproject/zephyr
+ 1781  cd
+ 1782  cd zephyrproject/zephyr
+ 1783  git branch
+ 1784  git branch -m main_stevez main_stevez_1.8.6
+ 1785  git branch
+ 1786  git branch -m main_fatemeh main_fatemeh_1.8.6
+ 1787  git branch
+ 1788  west build -p -b neorv32 samples/basic/blinky
+ 1789  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1790  source ~/zephyrproject/.venv/bin/activate
+ 1791  cd zephyrproject/zephyr
+ 1792  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1793  source ~/zephyrproject/.venv/bin/activate
+ 1794  cd zephyrproject/zephyr
+ 1795  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1796  source ~/zephyrproject/.venv/bin/activate
+ 1797  cd zephyrproject/zephyr
+ 1798  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1799  source ~/zephyrproject/.venv/bin/activate
+ 1800  cd zephyrproject/zephyr
+ 1801  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1802  source ~/zephyrproject/.venv/bin/activate
+ 1803  cd zephyrproject/zephyr
+ 1804  source ~/zephyrproject/.venv/bin/activate
+ 1805  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1806  source ~/zephyrproject/.venv/bin/activate
+ 1807  cd zephyrproject/zephyr
+ 1808  west build -p -b neorv32 samples/basic/blinky_stevez
+ 1809  west build -p -b neorv32 samples/threads
+ 1810  west build -p -b neorv32 samples/basic/threads
+ 1811  source ~/zephyrproject/.venv/bin/activate
+ 1812  cd zephyrproject/zephyr
+ 1813  west build -p -b neorv32 samples/basic/threads
+ 1814  west build -t rom_report
+ 1815  west build -p -b neorv32 samples/basic/threads
+ 1816  source ~/zephyrproject/.venv/bin/activate
+ 1817  cd zephyrproject/zephyr
+ 1818  west build -p -b neorv32 samples/basic/threads
+ 1819  west build -p -b neorv32 samples/stevez/demos/threads/thread_start
+ 1820  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_start
+ 1821  west build -t run
+ 1822  clear
+ 1823  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_start
+ 1824  west build -t run
+ 1825  source ~/zephyrproject/.venv/bin/activate
+ 1826  cd zephyrproject/zephyr
+ 1827  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_join
+ 1828  west build -t run
+ 1829  source ~/zephyrproject/.venv/bin/activate
+ 1830  cd zephyrproject/zephyr
+ 1831  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_join
+ 1832  west build -t run
+ 1833  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_join
+ 1834  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_join
+ 1835  west build -t run > samples/stevez/demos/threads/thread_join/results.txt
+ 1836  source ~/zephyrproject/.venv/bin/activate
+ 1837  cd zephyrproject/zephyr
+ 1838  west build -p -b neorv32 samples/stevez/demos/threads/thread_join
+ 1839  source ~/zephyrproject/.venv/bin/activate
+ 1840  cd zephyrproject/zephyr
+ 1841  west build -p -b neorv32 samples/stevez/demos/threads/thread_join
+ 1842  source ~/zephyrproject/.venv/bin/activate
+ 1843  cd zephyrproject/zephyr
+ 1844  west build -p -b neorv32 samples/stevez/demos/threads/thread_join
+ 1845  west build -p -b neorv32 samples/stevez/demos/threads/thread_start
+ 1846  west build -p -b qemu_riscv32 samples/stevez/demos/threads/thread_start
+ 1847  west build -t run > samples/stevez/demos/threads/thread_start/results.txt
+ 1848  source ~/zephyrproject/.venv/bin/activate
+ 1849  cd zephyrproject/zephyr
+ 1850  west build -p -b neorv32 samples/stevez/demos/threads/thread_start
+ 1851  source ~/zephyrproject/.venv/bin/activate
+ 1852  cd zephyrproject/zephyr
+ 1853  west build -p -b neorv32 samples/stevez/demos/threads/thread_start
+ 1854  source ~/zephyrproject/.venv/bin/activate
+ 1855  cd zephyrproject/zephyr
+ 1856  west build -p -b neorv32 samples/stevez/demos/threads/thread_start
+ 1857  west build -p -b neorv32 samples/basic/threads
+ 1858  source ~/zephyrproject/.venv/bin/activate
+ 1859  cd zephyrproject/zephyr
+ 1860  west build -p -b neorv32 samples/basic/threads
+ 1861  west build -p -b qemu_riscv32 samples/basic/threads
+ 1862  west build -p -b neorv32 samples/basic/threads
+ 1863  west build -p -b neorv32 samples/philosophers
+ 1864  source ~/zephyrproject/.venv/bin/activate
+ 1865  cd zephyrproject/zephyr
+ 1866  west build -p -b neorv32 samples/philosophers
+ 1867  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1868  source ~/zephyrproject/.venv/bin/activate
+ 1869  cd zephyrproject/zephyr
+ 1870  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1871  source ~/zephyrproject/.venv/bin/activate
+ 1872  cd zephyrproject/zephyr
+ 1873  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1874  source ~/zephyrproject/.venv/bin/activate
+ 1875  cd zephyrproject/zephyr
+ 1876  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1877  source ~/zephyrproject/.venv/bin/activate
+ 1878  cd zephyrproject/zephyr
+ 1879  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1880  source ~/zephyrproject/.venv/bin/activate
+ 1881  cd zephyrproject/zephyr
+ 1882  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1883  source ~/zephyrproject/.venv/bin/activate
+ 1884  cd zephyrproject/zephyr
+ 1885  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1886  source ~/zephyrproject/.venv/bin/activate
+ 1887  cd zephyrproject/zephyr
+ 1888  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1889  source ~/zephyrproject/.venv/bin/activate
+ 1890  cd zephyrproject/zephyr
+ 1891  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1892  source ~/zephyrproject/.venv/bin/activate
+ 1893  cd zephyrproject/zephyr
+ 1894  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1895  source ~/zephyrproject/.venv/bin/activate
+ 1896  cd zephyrproject/zephyr
+ 1897  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1898  source ~/zephyrproject/.venv/bin/activate
+ 1899  cd zephyrproject/zephyr
+ 1900  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1901  source ~/zephyrproject/.venv/bin/activate
+ 1902  cd zephyrproject/zephyr
+ 1903  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1904  cat /proc/sys/fs/inotify/max_user_watches
+ 1905  code /etc/sysctl.conf
+ 1906  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1907  source ~/zephyrproject/.venv/bin/activate
+ 1908  cd zephyrproject/zephyr
+ 1909  west build -p -b neorv32 samples/stevez/demos/blinky
+ 1910  west build -p -b neorv32 samples/synchronization
+ 1911  west build -p -b qemu_riscv32 samples/synchronization
+ 1912  west build -t run
+ 1913  open /etc/sysctl.conf
+ 1914  code
+ 1915  code /etc/sysctl.conf
+ 1916  cat /proc/sys/fs/inotify/max_user_watches
+ 1917  pwd
+ 1918  /home/stevez/sysctl.conf
+ 1919  sudocode /etc/sysctl.conf
+ 1920  sudo code /etc/sysctl.conf
+ 1921  sudo vim /etc/sysctl.conf
+ 1922  open /etc/sysctl.conf
+ 1923  sudo vim /etc/sysctl.conf
+ 1924  df -H
+ 1925  source ~/zephyrproject/.venv/bin/activate
+ 1926  cd zephyrproject/zephyr
+ 1927  west build -p -b qemu_riscv32 samples/synchronization
+ 1928  west build -t run
+ 1929  west build -p -b neorv32 samples/synchronization
+ 1930  west build -p -b qemu_riscv32 samples/synchronization
+ 1931  west build -t run
+ 1932  git branch
+ 1933  cat /proc/sys/fs/inotify/max_user_watches
+ 1934  code /etc/sysctl.conf
+ 1935  west build -t rom_report
+ 1936  source ~/zephyrproject/.venv/bin/activate
+ 1937  cd zephyrproject/zephyr
+ 1938  source ~/zephyrproject/.venv/bin/activate
+ 1939  cd zephyrproject/zephyr
+ 1940  cat /proc/sys/fs/inotify/max_user_watches
+ 1941  sudo code /etc/sysctl.conf
+ 1942  sudo vim /etc/sysctl.conf
+ 1943  sudo sysctl -p
+ 1944  cat /proc/sys/fs/inotify/max_user_watches
+ 1945  source ~/zephyrproject/.venv/bin/activate
+ 1946  cd zephyrproject/zephyr
+ 1947  west build -p -b neorv32 samples/stevez/demos/scheduling/preemptive
+ 1948  west build -p -b qemu_riscv32 samples/stevez/demos/scheduling/preemptive
+ 1949  west build -t run
+ 1950  west build -p -b neorv32 samples/stevez/demos/scheduling/preemptive
+ 1951  west build -p -b qemu_riscv32 samples/stevez/demos/scheduling/preemptive
+ 1952  west build -t run
+ 1953  west build -p -b qemu_riscv32 samples/stevez/demos/scheduling/preemptive
+ 1954  west build -t run
+ 1955  west build -p -b qemu_riscv32 samples/stevez/demos/scheduling/preemptive
+ 1956  west build -t run
+ 1957  west build -p -b qemu_riscv32 samples/stevez/demos/scheduling/cooperative
+ 1958  west build -t run
+ 1959  source ~/zephyrproject/.venv/bin/activate
+ 1960  cd zephyrproject/zephyr
+ 1961  source ~/zephyrproject/.venv/bin/activate
+ 1962  cd zephyrproject/zephyr
+ 1963  source ~/zephyrproject/.venv/bin/activate
+ 1964  cd zephyrproject/zephyr
+ 1965  source ~/zephyrproject/.venv/bin/activate
+ 1966  cd zephyrproject/zephyr
+ 1967  west build -p -b qemu_riscv32 samples/stevez/Syssarch/two-task
+ 1968  west build -p -b qemu_riscv32 samples/basic/threads
+ 1969  west build -p -b neorv32 samples/basic/threads
+ 1970  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1971  clear
+ 1972  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1973  source ~/zephyrproject/.venv/bin/activate
+ 1974  cd zephyrproject/zephyr
+ 1975  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1976  west build -t rom_report
+ 1977  source ~/zephyrproject/.venv/bin/activate
+ 1978  cd zephyrproject/zephyr
+ 1979  source ~/zephyrproject/.venv/bin/activate
+ 1980  cd zephyrproject/zephyr
+ 1981  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1982  source ~/zephyrproject/.venv/bin/activate
+ 1983  cd zephyrproject/zephyr
+ 1984  source ~/zephyrproject/.venv/bin/activate
+ 1985  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1986  source ~/zephyrproject/.venv/bin/activate
+ 1987  cd zephyrproject/zephyr
+ 1988  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1989  source ~/zephyrproject/.venv/bin/activate
+ 1990  cd zephyrproject/zephyr
+ 1991  west build -p -b neorv32 samples/stevez/Syssarch/two-task
+ 1992  cd neorv32/sw/example
+ 1993  ls
+ 1994  cd neorv32/sw/example
+ 1995  ls
+ 1996  git branch
+ 1997  git status
+ 1998  git log
+ 1999  cd hello_world
+ 2000  ls
+ 2001  history > command_history.txt

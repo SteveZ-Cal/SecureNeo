@@ -1,0 +1,140 @@
+// #################################################################################################
+// # << NEORV32 - "Hello World" Demo Program >>                                                    #
+// # ********************************************************************************************* #
+// # BSD 3-Clause License                                                                          #
+// #                                                                                               #
+// # Copyright (c) 2023, Stephan Nolting. All rights reserved.                                     #
+// #                                                                                               #
+// # Redistribution and use in source and binary forms, with or without modification, are          #
+// # permitted provided that the following conditions are met:                                     #
+// #                                                                                               #
+// # 1. Redistributions of source code must retain the above copyright notice, this list of        #
+// #    conditions and the following disclaimer.                                                   #
+// #                                                                                               #
+// # 2. Redistributions in binary form must reproduce the above copyright notice, this list of     #
+// #    conditions and the following disclaimer in the documentation and/or other materials        #
+// #    provided with the distribution.                                                            #
+// #                                                                                               #
+// # 3. Neither the name of the copyright holder nor the names of its contributors may be used to  #
+// #    endorse or promote products derived from this software without specific prior written      #
+// #    permission.                                                                                #
+// #                                                                                               #
+// # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS   #
+// # OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF               #
+// # MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE    #
+// # COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,     #
+// # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE #
+// # GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED    #
+// # AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING     #
+// # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED  #
+// # OF THE POSSIBILITY OF SUCH DAMAGE.                                                            #
+// # ********************************************************************************************* #
+// # The NEORV32 Processor - https://github.com/stnolting/neorv32              (c) Stephan Nolting #
+// #################################################################################################
+
+
+/**********************************************************************//**
+ * @file hello_world/main.c
+ * @author Stephan Nolting
+ * @brief Classic 'hello world' demo program.
+ **************************************************************************/
+
+#include <neorv32.h>
+
+
+/**********************************************************************//**
+ * @name User configuration
+ **************************************************************************/
+/**@{*/
+/** UART BAUD rate */
+#define BAUD_RATE 19200
+/**@}*/
+
+
+
+/**********************************************************************//**
+ * Main function; prints some fancy stuff via UART.
+ *
+ * @note This program requires the UART interface to be synthesized.
+ *
+ * @return 0 if execution was successful
+ **************************************************************************/
+
+uint32_t CFS_REG_0_ADDR = 0xfffffe00;
+
+// (stevez) 11/8/2023 using this address when press 'e' for execute
+/** I-O-Guard Task0 base address */
+#ifndef TASK0_BASE_ADDR    
+  //#define TASK0_BASE_ADDR 0x00010000UL
+  #define TASK0_BASE_ADDR 0x00002000UL
+  //#define TASK0_BASE_ADDR 0x80000000UL
+  //#define TASK0_BASE_ADDR 0x00001834UL
+#endif
+
+// void nop() {
+//     asm("nop");
+// }
+
+int main() {
+
+    // Declare a pointer to an integer
+    uint32_t *ptr;
+
+    // Assign the address 0x80002000 to the pointer
+    ptr = (uint32_t *)0x80002000;
+
+  // capture all exceptions and give debug info via UART
+  // this is not required, but keeps us safe
+  neorv32_rte_setup();
+
+  // setup UART at default baud rate, no interrupts
+  neorv32_uart0_setup(BAUD_RATE, 0);
+
+  // check available hardware extensions and compare with compiler flags
+  neorv32_rte_check_isa(0); // silent = 0 -> show message if isa mismatch
+  // for(uint32_t i = 0; i < 4; i++){
+  //   nop();
+  // }
+
+  neorv32_gpio_port_set(4);
+  neorv32_cpu_delay_ms(1000); // wait 1000ms using busy wait
+
+  neorv32_uart0_printf("[*****]]\n");
+  neorv32_uart0_printf("[[START OF HELLO_WORLD!!]]\n");
+  neorv32_uart0_printf("Value from 0x20000 at 0x80002000 : [%d]\n", *ptr);
+
+  // print project logo via UART
+  // neorv32_rte_print_logo();
+
+  // say hello
+  neorv32_uart0_puts("HELLO_WORLD: **************************************** :)\n");
+
+  /* (stevez) NEORV32 CFS REG testing */
+
+  // uint32_t *CFS_REG_0 = CFS_REG_0_ADDR;
+
+  // neorv32_uart0_printf("CFS_REG_0 <Address Accessing> [%x]\n", *CFS_REG_0);
+
+  // neorv32_uart0_printf("CFS_REG_0 <API Accessing> [%x]\n", NEORV32_CFS->REG[0]);
+
+  // NEORV32_CFS->REG[0] = 1;
+
+  // neorv32_uart0_printf("CFS_REG_0 Assign\n");
+
+  // neorv32_uart0_printf("Update: CFS_REG_0 <Address Accessing> [%x]\n", *CFS_REG_0);
+  // neorv32_uart0_printf("Update: CFS_REG_0 <API Accessing> [%x]\n", NEORV32_CFS->REG[0]);
+
+  //asm volatile ("li t0, %[input_i]; jr t0" :  : [input_i] "i" (BOOTLOADER_BASE_ADDRESS)); // jump to beginning of boot ROM
+  //asm volatile ("li t0, %[input_i]; jr t0" :  : [input_i] "i" (TASK0_BASE_ADDR)); // jump to beginning of boot ROM
+
+  neorv32_gpio_port_set(0);
+  neorv32_cpu_delay_ms(1000); // wait 1000ms using busy wait
+
+  neorv32_uart0_printf("<<Before Exit hello_world>>\n");
+  asm volatile ("jalr ra, %0" : : "r" (0x00020000)); 
+  // asm volatile ("jalr ra, %0" : : "r" (0xFFFF0000)); 
+  // asm volatile ("li t0, %[input_i]; jr t0" :  : [input_i] "i" (0x2000)); // jump to beginning of 0x2000
+  neorv32_uart0_printf("{{Exit hello_world}}\n");
+
+  return 0;
+}

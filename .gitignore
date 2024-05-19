@@ -1,0 +1,127 @@
+###### zephyr ###### (from official zephyr repo)
+
+*.o
+*.a
+*.d
+*.cmd
+*.log
+*.pyc
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+build*/
+!doc/build/
+!scripts/build
+!tests/drivers/build_all
+!scripts/pylib/build_helpers
+cscope.*
+.dir
+
+/*.patch
+
+# The .cache directory will be used to cache toolchain capabilities if
+# no suitable out-of-tree directory is found.
+.cache
+
+outdir
+outdir-*
+scripts/basic/fixdep
+scripts/gen_idt/gen_idt
+doc/_build
+doc/doxygen
+doc/xml
+doc/html
+doc/boards
+doc/samples
+doc/latex
+doc/themes/zephyr-docs-theme
+sanity-out*
+twister-out*
+bsim_out
+bsim_bt_out
+tests/RunResults.xml
+scripts/grub
+doc/reference/kconfig/*.rst
+doc/doc.warnings
+.*project
+.settings
+.envrc
+.vscode
+hide-defaults-note
+venv
+.venv
+.DS_Store
+.clangd
+
+# CI output
+compliance.xml
+_error.types
+
+# Tag files
+GPATH
+GRTAGS
+GTAGS
+TAGS
+tags
+
+.idea
+
+# from check_compliance.py
+BinaryFiles.txt
+Checkpatch.txt
+DevicetreeBindings.txt
+Gitlint.txt
+Identity.txt
+ImageSize.txt
+Kconfig.txt
+KconfigBasic.txt
+KconfigBasicNoModules.txt
+MaintainersFormat.txt
+Nits.txt
+Pylint.txt
+YAMLLint.txt
+
+
+
+###### neorv32 ###### (from official neorv32 repo)
+
+# doit databases
+/.doit.db.*
+
+# python
+__pycache__
+
+# generated application files
+*.bin
+*.o
+*.elf
+*.asm
+*.out
+*.hex
+*_image.vhd
+
+# GDB logs
+*.gdb_history
+
+# keep default VHDL memory images
+!rtl/core/*_image.vhd
+
+# host executables
+sw/image_gen/image_gen
+sw/image_gen/image_gen.exe
+
+# temporary/legacy files/folders
+*.tmp
+~*
+
+# generated documentation stuff
+/docs/doxygen_build/
+/docs/.asciidoctor/
+/docs/public/
+/docs/figures/diag-*.svg
+
+# compiled ghdl stuff
+*.cf
+*.o
