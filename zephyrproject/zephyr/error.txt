@@ -1,0 +1,258 @@
+-- west build: making build dir /home/stevez/zephyrproject/zephyr/build pristine
+-- west build: generating a build system
+-- Application: /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main
+-- CMake version: 3.27.2
+-- Found Python3: /home/stevez/zephyrproject/.venv/bin/python3 (found suitable exact version "3.8.10") found components: Interpreter 
+-- Cache files will be written to: /home/stevez/.cache/zephyr
+-- Zephyr version: 3.4.99 (/home/stevez/zephyrproject/zephyr)
+-- Found west (found suitable version "1.1.0", minimum required is "0.14.0")
+-- Board: neorv32, Revision: 1.8.6
+-- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+-- Found host-tools: zephyr 0.16.1 (/home/stevez/zephyr-sdk-0.16.1)
+-- Found toolchain: zephyr 0.16.1 (/home/stevez/zephyr-sdk-0.16.1)
+-- Found Dtc: /home/stevez/zephyr-sdk-0.16.1/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.6.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/stevez/zephyrproject/zephyr/boards/riscv/neorv32/neorv32.dts
+-- Generated zephyr.dts: /home/stevez/zephyrproject/zephyr/build/zephyr/zephyr.dts
+-- Generated devicetree_generated.h: /home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/devicetree_generated.h
+-- Including generated dts.cmake file: /home/stevez/zephyrproject/zephyr/build/zephyr/dts.cmake
+Parsing /home/stevez/zephyrproject/zephyr/Kconfig
+Loaded configuration '/home/stevez/zephyrproject/zephyr/boards/riscv/neorv32/neorv32_defconfig'
+Merged configuration '/home/stevez/zephyrproject/zephyr/boards/riscv/neorv32/neorv32_1_8_6.conf'
+Merged configuration '/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/prj.conf'
+Configuration saved to '/home/stevez/zephyrproject/zephyr/build/zephyr/.config'
+Kconfig header saved to '/home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/autoconf.h'
+-- Found GnuLd: /home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/bin/../lib/gcc/riscv64-zephyr-elf/12.2.0/../../../../riscv64-zephyr-elf/bin/ld.bfd (found version "2.38") 
+-- The C compiler identification is GNU 12.2.0
+-- The CXX compiler identification is GNU 12.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/bin/riscv64-zephyr-elf-gcc
+-- neorv32 binary will be written to: /home/stevez/zephyrproject/zephyr/build/zephyr/zephyr_exe.bin
+-- neorv32 VHDL will be written to: /home/stevez/zephyrproject/zephyr/build/zephyr/zephyr.vhd
+-- Configuring done (3.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/stevez/zephyrproject/zephyr/build
+-- west build: building application
+[1/128] Preparing syscall dependency handling
+
+[2/128] Generating include/generated/version.h
+-- Zephyr version: 3.4.99 (/home/stevez/zephyrproject/zephyr), build: zephyr-v3.4.0-2537-g6526178317e6
+[3/128] Generating misc/generated/syscalls_subdirs.trigger
+[4/128] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/128] Generating include/generated/syscall_dispatch.c, include/generated/syscall_list.h
+[6/128] Generating include/generated/driver-validation.h
+[7/128] Generating include/generated/kobj-types-enum.h, include/generated/otype-to-str.h, include/generated/otype-to-size.h
+[8/128] Building C object zephyr/CMakeFiles/offsets.dir/arch/riscv/core/offsets/offsets.c.obj
+[9/128] Generating include/generated/offsets.h
+[10/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/dec.c.obj
+[11/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/fdtable.c.obj
+[12/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/hex.c.obj
+[13/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[14/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[15/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/timeutil.c.obj
+[16/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/heap.c.obj
+[17/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/heap-validate.c.obj
+[18/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/bitarray.c.obj
+[19/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/multi_heap.c.obj
+[20/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[21/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/p4wq.c.obj
+[25/128] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[26/128] Building C object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/common/idle.c.obj
+[27/128] Building C object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/common/soc_common_irq.c.obj
+[28/128] Building ASM object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/common/vector.S.obj
+[29/128] Building ASM object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/neorv32/reset.S.obj
+[30/128] Building ASM object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/neorv32/soc_irq.S.obj
+[31/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[32/128] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/rb.c.obj
+[33/128] Building ASM object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/common/soc_irq.S.obj
+[34/128] Building C object zephyr/CMakeFiles/zephyr.dir/soc/riscv/riscv-privileged/neorv32/soc.c.obj
+[35/128] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[36/128] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/sw_isr_common.c.obj
+[37/128] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/timing.c.obj
+[38/128] Building C object zephyr/arch/common/CMakeFiles/isr_tables.dir/isr_tables.c.obj
+[39/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/cpu_idle.c.obj
+[40/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/irq_manage.c.obj
+[41/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/prep_c.c.obj
+[42/128] Generating linker_zephyr_pre0.cmd
+[43/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/fatal.c.obj
+[44/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/reboot.c.obj
+[45/128] Building C object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/thread.c.obj
+[46/128] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/stdlib/abort.c.obj
+[47/128] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/string/strnlen.c.obj
+[48/128] Building C object zephyr/subsys/timing/CMakeFiles/subsys__timing.dir/timing.c.obj
+[49/128] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/uart_console.c.obj
+[50/128] Building C object zephyr/drivers/gpio/CMakeFiles/drivers__gpio.dir/gpio_neorv32.c.obj
+[51/128] Building C object zephyr/drivers/serial/CMakeFiles/drivers__serial.dir/uart_neorv32.c.obj
+[52/128] Building C object zephyr/drivers/syscon/CMakeFiles/drivers__syscon.dir/syscon.c.obj
+[53/128] Building ASM object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/reset.S.obj
+[54/128] Building ASM object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/switch.S.obj
+[55/128] Linking C static library zephyr/arch/common/libisr_tables.a
+[56/128] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[57/128] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/riscv_machine_timer.c.obj
+[58/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[59/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[60/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[61/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[62/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[63/128] Building ASM object zephyr/arch/arch/riscv/core/CMakeFiles/arch__riscv__core.dir/isr.S.obj
+[64/128] Generating ../../../include/generated/libc/minimal/strerror_table.h
+[65/128] Linking C static library zephyr/libzephyr.a
+[66/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[67/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[68/128] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[69/128] Linking C static library zephyr/drivers/gpio/libdrivers__gpio.a
+[70/128] Linking C static library zephyr/drivers/serial/libdrivers__serial.a
+[71/128] Linking C static library zephyr/drivers/syscon/libdrivers__syscon.a
+[72/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[74/128] Linking C static library zephyr/subsys/timing/libsubsys__timing.a
+[75/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[76/128] Linking C static library zephyr/arch/common/libarch__common.a
+[77/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[78/128] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[79/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[81/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[82/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[83/128] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[84/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/atoi.c.obj
+[85/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/strtol.c.obj
+[86/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/strtoul.c.obj
+[87/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/strtoll.c.obj
+[88/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/bsearch.c.obj
+[89/128] Linking C static library zephyr/arch/arch/riscv/core/libarch__riscv__core.a
+[90/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/strtoull.c.obj
+[91/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/exit.c.obj
+[92/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdlib/qsort.c.obj
+[93/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/string/strerror.c.obj
+[94/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/string/strncasecmp.c.obj
+[95/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/string/strstr.c.obj
+[96/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/string/string.c.obj
+[97/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/string/strspn.c.obj
+[98/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdout/stdout_console.c.obj
+[99/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdout/sprintf.c.obj
+[100/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/stdout/fprintf.c.obj
+[101/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/math/sqrtf.c.obj
+[102/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/math/sqrt.c.obj
+[103/128] Building C object zephyr/lib/libc/minimal/CMakeFiles/lib__libc__minimal.dir/source/time/gmtime.c.obj
+[104/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[105/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[106/128] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/stdlib/malloc.c.obj
+[107/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[108/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[109/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[110/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[111/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[112/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/xip.c.obj
+[113/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[114/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[115/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/atomic_c.c.obj
+[116/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[117/128] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[118/128] Linking C static library zephyr/lib/libc/common/liblib__libc__common.a
+[119/128] Linking C static library zephyr/lib/libc/minimal/liblib__libc__minimal.a
+[120/128] Linking C static library zephyr/kernel/libkernel.a
+[121/128] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/bin/riscv64-zephyr-elf-gcc -DKERNEL -D__ZEPHYR__=1 -I/home/stevez/zephyrproject/zephyr/include -I/home/stevez/zephyrproject/zephyr/build/zephyr/include/generated -I/home/stevez/zephyrproject/zephyr/soc/riscv/riscv-privileged/neorv32 -I/home/stevez/zephyrproject/zephyr/soc/riscv/riscv-privileged/common/. -I/home/stevez/zephyrproject/modules/lib/acpica/../../zephyr/include -I/home/stevez/zephyrproject/modules/lib/acpica/.. -I/home/stevez/zephyrproject/modules/lib/acpica/source/include -I/home/stevez/zephyrproject/modules/lib/acpica/source/include/platform -I/home/stevez/zephyrproject/modules/lib/acpica/source/compiler -I/home/stevez/zephyrproject/modules/lib/acpica/generate/zephyr -I/home/stevez/zephyrproject/modules/lib/acpica/source/tools/acpiexec -I/home/stevez/zephyrproject/modules/lib/acpica/source/tools/acpidump -isystem /home/stevez/zephyrproject/zephyr/lib/libc/minimal/include -isystem /home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/bin/../lib/gcc/riscv64-zephyr-elf/12.2.0/include -isystem /home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/bin/../lib/gcc/riscv64-zephyr-elf/12.2.0/include-fixed -fno-strict-aliasing -Os -imacros /home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/autoconf.h -ffreestanding -fno-common -g -gdwarf-4 -fdiagnostics-color=always -mabi=ilp32 -march=rv32imac_zicsr_zifencei --sysroot=/home/stevez/zephyr-sdk-0.16.1/riscv64-zephyr-elf/riscv64-zephyr-elf -imacros /home/stevez/zephyrproject/zephyr/include/zephyr/toolchain/zephyr_stdint.h -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/stevez/zephyrproject/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/stevez/zephyrproject=WEST_TOPDIR -ffunction-sections -fdata-sections -std=c99 -nostdinc -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c
+In file included from /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:8:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h: In function 'neorv32_gpio_raw1_v2':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:92:98: warning: implicit declaration of function 'cpu_get_mycycle' [-Wimplicit-function-declaration]
+   92 |                 printf("@@@@@@@@@@@@@@@@@ I/O Access Latency (MTIME) @@@@@@@@@@@@@@@@@: [%u]\n", cpu_get_mycycle(latencyStart, latencyEnd));
+      |                                                                                                  ^~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h: In function 'task1':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:124:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'k_tid_t' {aka 'struct k_thread *'} [-Wformat=]
+  124 |         printf("Task 1 ID: %u\n", k_current_get());
+      |                            ~^     ~~~~~~~~~~~~~~~
+      |                             |     |
+      |                             |     k_tid_t {aka struct k_thread *}
+      |                             unsigned int
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:148:40: warning: unknown escape sequence: '\T'
+  148 |                 printf("\TASK1 LOOP:\n");
+      |                                        ^
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:200:38: warning: passing argument 1 of 'neorv32_gpio_raw1_v2' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  200 |                 neorv32_gpio_raw1_v2(gpio_ct_dev_task1, myPortPins, myPortValue, task1_to_wait, TASK1_NUM_ITERATION);
+      |                                      ^~~~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:63:42: note: expected 'struct device *' but argument is of type 'const struct device *'
+   63 | void neorv32_gpio_raw1_v2(struct device *gpio_ct_dev_task, gpio_port_pins_t mask, gpio_port_value_t value, uint32_t task_to_wait, uint32_t num_iteration){
+      |                           ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:9:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task2.h: In function 'task2':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task2.h:98:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'k_tid_t' {aka 'struct k_thread *'} [-Wformat=]
+   98 |         printf("Task 2 ID: %u\n", k_current_get());
+      |                            ~^     ~~~~~~~~~~~~~~~
+      |                             |     |
+      |                             |     k_tid_t {aka struct k_thread *}
+      |                             unsigned int
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task2.h:122:40: warning: unknown escape sequence: '\T'
+  122 |                 printf("\TASK2 LOOP:\n");
+      |                                        ^
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task2.h:180:38: warning: passing argument 1 of 'neorv32_gpio_raw1_v2' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  180 |                 neorv32_gpio_raw1_v2(gpio_ct_dev_task2, myPortPins, myPortValue, task2_to_wait, TASK2_NUM_ITERATION);
+      |                                      ^~~~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:63:42: note: expected 'struct device *' but argument is of type 'const struct device *'
+   63 | void neorv32_gpio_raw1_v2(struct device *gpio_ct_dev_task, gpio_port_pins_t mask, gpio_port_value_t value, uint32_t task_to_wait, uint32_t num_iteration){
+      |                           ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:10:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task3.h: In function 'task3':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task3.h:98:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'k_tid_t' {aka 'struct k_thread *'} [-Wformat=]
+   98 |         printf("Task 3 ID: %u\n", k_current_get());
+      |                            ~^     ~~~~~~~~~~~~~~~
+      |                             |     |
+      |                             |     k_tid_t {aka struct k_thread *}
+      |                             unsigned int
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task3.h:122:40: warning: unknown escape sequence: '\T'
+  122 |                 printf("\TASK3 LOOP:\n");
+      |                                        ^
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task3.h:181:38: warning: passing argument 1 of 'neorv32_gpio_raw1_v2' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  181 |                 neorv32_gpio_raw1_v2(gpio_ct_dev_task3, myPortPins, myPortValue, task3_to_wait, TASK3_NUM_ITERATION);
+      |                                      ^~~~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:63:42: note: expected 'struct device *' but argument is of type 'const struct device *'
+   63 | void neorv32_gpio_raw1_v2(struct device *gpio_ct_dev_task, gpio_port_pins_t mask, gpio_port_value_t value, uint32_t task_to_wait, uint32_t num_iteration){
+      |                           ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:18:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/utils.h: At top level:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/utils.h:133:14: error: conflicting types for 'cpu_get_mycycle'; have 'unsigned int(unsigned int,  unsigned int)'
+  133 | unsigned int cpu_get_mycycle(unsigned int latencyStart, unsigned int latencyEnd){
+      |              ^~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/task1.h:92:98: note: previous implicit declaration of 'cpu_get_mycycle' with type 'int()'
+   92 |                 printf("@@@@@@@@@@@@@@@@@ I/O Access Latency (MTIME) @@@@@@@@@@@@@@@@@: [%u]\n", cpu_get_mycycle(latencyStart, latencyEnd));
+      |                                                                                                  ^~~~~~~~~~~~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c: In function 'my_isr':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:104:16: warning: unused variable 'sp' [-Wunused-variable]
+  104 |   unsigned int sp;
+      |                ^~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c: In function 'main':
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:334:41: warning: passing argument 4 of 'k_thread_create' from incompatible pointer type [-Wincompatible-pointer-types]
+  334 |                                         task1, NULL, NULL, NULL, PRIORITY, 0, K_FOREVER);
+      |                                         ^~~~~
+      |                                         |
+      |                                         void (*)(void)
+In file included from /home/stevez/zephyrproject/zephyr/include/zephyr/kernel.h:6051,
+                 from /home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:1:
+/home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/syscalls/kernel.h:57:131: note: expected 'k_thread_entry_t' {aka 'void (*)(void *, void *, void *)'} but argument is of type 'void (*)(void)'
+   57 | static inline k_tid_t k_thread_create(struct k_thread * new_thread, k_thread_stack_t * stack, size_t stack_size, k_thread_entry_t entry, void * p1, void * p2, void * p3, int prio, uint32_t options, k_timeout_t delay)
+      |                                                                                                                  ~~~~~~~~~~~~~~~~~^~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:338:41: warning: passing argument 4 of 'k_thread_create' from incompatible pointer type [-Wincompatible-pointer-types]
+  338 |                                         task2, NULL, NULL, NULL, PRIORITY, 0, K_FOREVER);
+      |                                         ^~~~~
+      |                                         |
+      |                                         void (*)(void)
+/home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/syscalls/kernel.h:57:131: note: expected 'k_thread_entry_t' {aka 'void (*)(void *, void *, void *)'} but argument is of type 'void (*)(void)'
+   57 | static inline k_tid_t k_thread_create(struct k_thread * new_thread, k_thread_stack_t * stack, size_t stack_size, k_thread_entry_t entry, void * p1, void * p2, void * p3, int prio, uint32_t options, k_timeout_t delay)
+      |                                                                                                                  ~~~~~~~~~~~~~~~~~^~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:343:41: warning: passing argument 4 of 'k_thread_create' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |                                         task3, NULL, NULL, NULL, PRIORITY, 0, K_FOREVER);
+      |                                         ^~~~~
+      |                                         |
+      |                                         void (*)(void)
+/home/stevez/zephyrproject/zephyr/build/zephyr/include/generated/syscalls/kernel.h:57:131: note: expected 'k_thread_entry_t' {aka 'void (*)(void *, void *, void *)'} but argument is of type 'void (*)(void)'
+   57 | static inline k_tid_t k_thread_create(struct k_thread * new_thread, k_thread_stack_t * stack, size_t stack_size, k_thread_entry_t entry, void * p1, void * p2, void * p3, int prio, uint32_t options, k_timeout_t delay)
+      |                                                                                                                  ~~~~~~~~~~~~~~~~~^~~~~
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c: At top level:
+/home/stevez/zephyrproject/zephyr/samples/stevez/Syssarch/I-O-Guard_main/src/main.c:63:24: warning: 'task4_data' defined but not used [-Wunused-variable]
+   63 | static struct k_thread task4_data;
+      |                        ^~~~~~~~~~
+ninja: build stopped: subcommand failed.
