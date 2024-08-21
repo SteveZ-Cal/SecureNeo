@@ -61,7 +61,7 @@ uint32_t zephyr_init_clock_prescaler = 7; // 7 represent f(clock frequency)/4096
 uint32_t zephyr_init_clock_prescaler_threshold = 100000;  // (recommended) set it to as big as possible
 
 // irq timing flag
-bool irq_timing = 1;
+bool irq_timing = 0;
 // for irq timing
 uint32_t irq_start, irq_end;
 uint32_t irq_cpu_time_used;

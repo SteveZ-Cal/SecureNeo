@@ -44,12 +44,14 @@
 bool verbose = 0;
 // global enable for rte
 bool enable = 1;
+// global enable for hybrid attestation
+bool verbose_hybridAttestation = 0;
 
 // hybrid attestation flag (1: testing --> mainly for visulization purpose, 0: actual attestation)
-bool hybrid_att_testing = 0;
+bool hybrid_att_testing = 1;
 
 // task0 init timing flag
-bool task0_init_timing = 1;
+bool task0_init_timing = 0;
 // for task0 initialization timing
 uint32_t task0_init_start, task0_init_end;
 uint32_t task0_init_cpu_time_used;

@@ -333,7 +333,8 @@ void neorv32_cfs_register_assign(uint32_t *padded_message, uint32_t num_register
   for(uint32_t i = 0; i < num_register_required; i++){
     index = start_register_index + i;
     NEORV32_CFS -> REG[index] = padded_message[i];
-    //neorv32_uart0_printf("CFS_REG[%d]: %x\n", index, NEORV32_CFS -> REG[index]);
+    // neorv32_uart0_printf("padding_message[%d]: %x\n", i, padded_message[i]);
+    // neorv32_uart0_printf("CFS_REG[%d]: %x\n", index, NEORV32_CFS -> REG[index]);
   }
 
 }
@@ -357,6 +358,7 @@ void neorv32_hashinput_concatenation_uint32(uint32_t* final_hash_input, uint32_t
     else{
       final_hash_input[i] = hash_data_input[i-previous_hash_output_length];
     }
+    // neorv32_uart0_printf("FINAL_HASH_INPUT[%d]: %x\n", i, final_hash_input[i]);
   }
 
 }
@@ -463,7 +465,7 @@ void neorv32_cfs_register_hash(uint32_t* hash_data_output_uint32, uint32_t data_
 
     hash_data_output_uint32[i-data_out_reg_start] = NEORV32_CFS -> REG[i];
     // neorv32_uart0_printf("HASH_DATA_OUTPUT_UINT32[%d]: %x\n", i-data_out_reg_start, hash_data_output_uint32[i-data_out_reg_start]); // (NEEDED)
-
+    // neorv32_uart0_printf("NEORV32_CFS->REG[%d]: %x\n", i, NEORV32_CFS -> REG[i]);
   }
 
   // neorv32_uart0_printf("[END: CFS_REGISTER_HASH]\n"); // (NEEDED)
@@ -490,7 +492,7 @@ void neorv32_IV_uint32_print(uint32_t *IV_uint32){
  * NEORV32 Hybrid Attestation --------------------------------------------------- For Testing Purpose
  **************************************************************************/
 
-void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint32_t clock_prescaler, uint32_t clock_prescaler_threshold, uint32_t mem_address){
+void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint32_t clock_prescaler, uint32_t clock_prescaler_threshold, uint32_t mem_address, uint32_t verbose){
 
   // uint32_t curmem_address = 0x80000000u; // current memory address (subjected to be modified by the user)
   // uint32_t mem_address = 0x80000000u; // initial memory address (subjected to be modified by the user)
@@ -541,35 +543,47 @@ void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint3
   // only initialize the memory space if the memory address is 0x80000000u (for testing purpose), else just skip this step
 
   if (mem_address == 0x80000000u){
-  
+
     for (uint32_t i = 0; i<mem_total_lines; i++){
 
         neorv32_cpu_store_unsigned_word(curmem_address, seed_val); // filling in the addressed space for calculating the hash
-        // neorv32_uart0_printf("DONE:[%x]\n", neorv32_cpu_load_unsigned_word(curmem_address)); // (MAYBE NEEDED)
+        // neorv32_uart0_printf("[%x]\n", neorv32_cpu_load_unsigned_word(curmem_address)); // (MAYBE NEEDED)
         curmem_address += size;
         
     }
 
   }
+  
+  if(verbose){
+      neorv32_uart0_printf("\nMemory Space to be Attested: \n"); // (NEEDED)
+      neorv32_uart0_printf("# of Total Memline: [%d] \n", mem_total_lines); // (NEEDED)
+      neorv32_address_print(mem_total_lines, mem_address); // (NEEDED)
+    }
 
     /**END OF INITIALIZATION*/
 
   neorv32_uart0_printf("\nStart Hybrid Attestation!!\n"); // (NEEDED)
 
   // set up the attestation timer
-  neorv32_gptmr_enable(); // enable timer
-  neorv32_gptmr_restart(); // restart timer
+  // neorv32_gptmr_enable(); // enable timer
+  // neorv32_gptmr_restart(); // restart timer
 
-  neorv32_gptmr_setup(clock_prescaler, 0, clock_prescaler_threshold); // main processor clock (clock_prescaler) division by 4096, timer operates in single shot mode, threshold = 1000
+  // neorv32_gptmr_setup(clock_prescaler, 0, clock_prescaler_threshold); // main processor clock (clock_prescaler) division by 4096, timer operates in single shot mode, threshold = 1000
 
-  start = neorv32_gptmr_curtime();
-  neorv32_uart0_printf("\n----- Start Timing ----- [%d]\n", start); //(NEEDED)
+  // start = neorv32_gptmr_curtime();
+  // neorv32_uart0_printf("\n----- Start Timing ----- [%d]\n", start); //(NEEDED)
 
   uint32_t hash_data_output_uint32[hash_length_uint32]; // initialize hash_data_output
 
+  if(verbose)
+    neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+
+  if(verbose)
+    neorv32_uart0_printf("Hash Output: \n");
+
   for (uint32_t loop = 0; loop < mem_loop; loop++){
 
-    neorv32_cfs_register_rst(); // reset all cfs registers
+    // neorv32_cfs_register_rst(); // reset all cfs registers
 
     // neorv32_uart0_printf("\nMESSAGE[%d]\n", loop); //(NEEDED)
 
@@ -580,6 +594,12 @@ void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint3
     // neorv32_uart0_printf("Getting Memory Content...\n"); //(NEEDED)
 
     neorv32_get_mem_uint32(hash_mem_uint32, mem_iter_lines, mem_address); // get the (mem_iter_lines) of memory 
+
+    if(verbose){
+      neorv32_uart0_printf("Memory Content: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
+
 
     uint32_t hash_content_uint32_length = hash_length_uint32 + data_length_uint32;
 
@@ -595,13 +615,28 @@ void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint3
     
     // neorv32_uart0_printf("Finalize Padded Message...\n"); // (NEEDED)
 
+    if(verbose){
+      neorv32_uart0_printf("Finalized Padded Message: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
+
     uint32_t final_padded_message_length = block_size/32;
     uint32_t final_padded_message[final_padded_message_length];
 
     neorv32_message_padding(final_padded_message, hash_content_uint32, final_padded_message_length, l);
 
+    if(verbose){
+      neorv32_uart0_printf("Assign to CFS Registers: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
+
     // neorv32_uart0_printf("Assign to CFS Registers...\n"); // (NEEDED)
     neorv32_cfs_register_assign(final_padded_message, final_padded_message_length);
+
+    if(verbose){
+      neorv32_uart0_printf("Data Ready: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
 
     // uint32_t middle = neorv32_gptmr_curtime();
     // neorv32_uart0_printf("\n----- Middle Timing ----- [%d]\n", middle); // (NEEDED)
@@ -616,31 +651,44 @@ void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint3
     
     NEORV32_CFS -> REG[DATA_READY_REG] = 0;
 
-    // neorv32_uart0_printf("Data Ready...\n"); // (NEEDED)
+    // // neorv32_uart0_printf("Data Ready...\n"); // (NEEDED)
 
-    // wait for the sha256 hardware finished signal
-    while(true){
+    // // wait for the sha256 hardware finished signal
+    // while(true){
 
-      //neorv32_uart0_printf("Checking Finished Signal...\n");
+    //   //neorv32_uart0_printf("Checking Finished Signal...\n");
 
-      if((uint32_t)NEORV32_CFS -> REG[FINISH_FLAG_REG] == 1){
-        // neorv32_uart0_printf("[Finished Hash Calcualtion]\n"); // (NEEDED)
-        break;
-      }
+    //   if((uint32_t)NEORV32_CFS -> REG[FINISH_FLAG_REG] == 1){
+    //     // neorv32_uart0_printf("[Finished Hash Calcualtion]\n"); // (NEEDED)
+    //     break;
+    //   }
 
-      // neorv32_uart0_printf("Loop End...\n");
+    //   // neorv32_uart0_printf("Loop End...\n");
     
-    }
+    // }
 
-    NEORV32_CFS -> REG[FINISH_FLAG_REG] == 0; // reset fininshed signal
+    // NEORV32_CFS -> REG[FINISH_FLAG_REG] == 0; // reset fininshed signal
     // neorv32_uart0_printf("Assign Hash Output...\n"); // (NEEDED)
+
+    if(verbose){
+      neorv32_uart0_printf("Assign Hash Output: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
 
     // assign hash_ouput
     neorv32_cfs_register_hash(hash_data_output_uint32, data_out_reg_start, data_out_reg_end);
 
-    // for(int i = 0; i < hash_length_uint32; i++){
-    //   neorv32_uart0_printf("HASH %d: [%x]\n", i, hash_data_output_uint32[i]);
-    // }
+    // print out the hash output for attested memory space
+    if(verbose){
+      for(int i = 0; i < hash_length_uint32; i++){
+        neorv32_uart0_printf("HASH %d: [%x]\n", i, hash_data_output_uint32[i]);
+      }
+    }
+
+    if(verbose){
+      neorv32_uart0_printf("End: \n"); // (NEEDED)
+      neorv32_cfs_register_print(48, 55); // print out the initial cfs registers for debugging purpose
+    }
 
     // neorv32_uart0_printf("\nEND OF Message[%d]\n", loop); // (NEEDED)
 
@@ -648,10 +696,10 @@ void Hybrid_Attestation(uint32_t this_num_blocks_cal, uint32_t* IV_uint32, uint3
 
   } // end of calculating first block_memory
 
-  end = neorv32_gptmr_curtime();
-  neorv32_uart0_printf("\n----- End Timing ----- [%d]\n", end); // (NEEDED)
-  cpu_time_used = end - start; 
-  neorv32_uart0_printf("Hybrid Attestation Time Used: [%d]\n", cpu_time_used);
+  // end = neorv32_gptmr_curtime();
+  // neorv32_uart0_printf("\n----- End Timing ----- [%d]\n", end); // (NEEDED)
+  // cpu_time_used = end - start; 
+  // neorv32_uart0_printf("Hybrid Attestation Time Used: [%d]\n", cpu_time_used);
 
   neorv32_uart0_printf("End of Hybrid Attestation"); // (NEEDED)
 

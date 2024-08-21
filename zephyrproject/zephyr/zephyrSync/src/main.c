@@ -42,6 +42,7 @@
 //uint64_t total_ns;
 
 /* size of stack area used by each thread */
+// #define STACKSIZE 1024
 #define STACKSIZE 1024
 
 /* scheduling priority used by each thread */
@@ -108,6 +109,253 @@ volatile uint32_t *PC = (volatile uint32_t *)NEORV32_DATA_BASE;
 volatile uint32_t *STATE = (volatile uint32_t *)(NEORV32_DATA_BASE+4); 
 
 void my_isr(void *arg){
+
+  // verbose = 1; --> for debugging
+
+  printf("\n<<<<<ENTER MY_ISR>>>>>.........................................\n");
+
+  unsigned int sp;
+
+  __asm__ __volatile__ (
+      "auipc %0, 0\n"    
+      //"jalr %0, %0, 4"   
+      : "=r" (NEORV32_CFS->REG[INT_PC_BACKWARD_REG]) // store the interrupt jump PC from zephyr to neorv32 task0
+  );
+
+  if(verbose){
+    printf("my_isr:\n");
+    printf("  NEORV32_CFS->REG[5]: [%x]\n", NEORV32_CFS->REG[INT_PC_BACKWARD_REG]);
+    printf("  NEORV32_CFS->REG[6]: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  }
+  
+  if(NEORV32_CFS->REG[INT_FLAG_REG]!=INT_FLAG_REG_UNSET){
+    
+    neorv32_cpu_csr_clr(CSR_MIP, 1 << CFS_FIRQ_PENDING);
+    
+    void (*task_pnt)(void);
+    task_pnt = (void*)NEORV32_CFS->REG[INT_PC_FORWARD_REG]; 
+
+    // save context, do not backup x0 and sp
+    __asm__ volatile (
+    #ifndef __riscv_32e
+      "addi sp, sp, -30*4 \n"
+    #else
+      "addi sp, sp, -14*4 \n"
+    #endif
+      "sw x1,   0*4(sp) \n"
+      "sw x3,   1*4(sp) \n"
+      "sw x4,   2*4(sp) \n"
+      "sw x5,   3*4(sp) \n"
+      "sw x6,   4*4(sp) \n"
+      "sw x7,   5*4(sp) \n"
+      "sw x8,   6*4(sp) \n"
+      "sw x9,   7*4(sp) \n"
+      "sw x10,  8*4(sp) \n"
+      "sw x11,  9*4(sp) \n"
+      "sw x12, 10*4(sp) \n"
+      "sw x13, 11*4(sp) \n"
+      "sw x14, 12*4(sp) \n"
+      "sw x15, 13*4(sp) \n"
+    #ifndef __riscv_32e
+      "sw x16, 14*4(sp) \n"
+      "sw x17, 15*4(sp) \n"
+      "sw x18, 16*4(sp) \n"
+      "sw x19, 17*4(sp) \n"
+      "sw x20, 18*4(sp) \n"
+      "sw x21, 19*4(sp) \n"
+      "sw x22, 20*4(sp) \n"
+      "sw x23, 21*4(sp) \n"
+      "sw x24, 22*4(sp) \n"
+      "sw x25, 23*4(sp) \n"
+      "sw x26, 24*4(sp) \n"
+      "sw x27, 25*4(sp) \n"
+      "sw x28, 26*4(sp) \n"
+      "sw x29, 27*4(sp) \n"
+      "sw x30, 28*4(sp) \n"
+      "sw x31, 29*4(sp) \n"
+    #endif
+    );
+    __asm__ volatile("mv %0, sp" : "=r" (NEORV32_CFS->REG[7]));
+    //return;
+    (*task_pnt)();
+  }
+
+  NEORV32_CFS->REG[INT_FLAG_REG] = INT_FLAG_REG_SET;
+
+  // restore context, do not restore x0 and sp
+  __asm__ volatile("mv sp, %0" : : "r" (NEORV32_CFS->REG[7]));
+  __asm__ volatile (
+    "lw x1,   0*4(sp) \n"
+    "lw x3,   1*4(sp) \n"
+    "lw x4,   2*4(sp) \n"
+    "lw x5,   3*4(sp) \n"
+    "lw x6,   4*4(sp) \n"
+    "lw x7,   5*4(sp) \n"
+    "lw x8,   6*4(sp) \n"
+    "lw x9,   7*4(sp) \n"
+    "lw x10,  8*4(sp) \n"
+    "lw x11,  9*4(sp) \n"
+    "lw x12, 10*4(sp) \n"
+    "lw x13, 11*4(sp) \n"
+    "lw x14, 12*4(sp) \n"
+    "lw x15, 13*4(sp) \n"
+    #ifndef __riscv_32e
+      "lw x16, 14*4(sp) \n"
+      "lw x17, 15*4(sp) \n"
+      "lw x18, 16*4(sp) \n"
+      "lw x19, 17*4(sp) \n"
+      "lw x20, 18*4(sp) \n"
+      "lw x21, 19*4(sp) \n"
+      "lw x22, 20*4(sp) \n"
+      "lw x23, 21*4(sp) \n"
+      "lw x24, 22*4(sp) \n"
+      "lw x25, 23*4(sp) \n"
+      "lw x26, 24*4(sp) \n"
+      "lw x27, 25*4(sp) \n"
+      "lw x28, 26*4(sp) \n"
+      "lw x29, 27*4(sp) \n"
+      "lw x30, 28*4(sp) \n"
+      "lw x31, 29*4(sp) \n"
+    #endif
+    #ifndef __riscv_32e
+      "addi sp, sp, +30*4 \n"
+    #else
+      "addi sp, sp, +14*4 \n"
+    #endif
+   // "ret              \n"
+  );
+
+  printf("\n>>>>>EXIT MY_ISR<<<<<<*****************************************\n");
+  printf("Machine exception program counter[%x]\n", neorv32_cpu_csr_read(CSR_MEPC));
+
+}
+
+// void demo_my_isr(void *arg){
+   
+//   printf("\n<<<<<ENTER MY_ISR>>>>>.........................................\n");
+
+//   unsigned int sp;
+
+//   __asm__ __volatile__ (
+//       "auipc %0, 0\n"    
+//       //"jalr %0, %0, 4"   
+//       : "=r" (NEORV32_CFS->REG[INT_PC_BACKWARD_REG]) // store the interrupt jump PC from zephyr to neorv32 task0
+//   );
+
+//   if(NEORV32_CFS->REG[INT_FLAG_REG]!=INT_FLAG_REG_UNSET){
+    
+//     neorv32_cpu_csr_clr(CSR_MIP, 1 << CFS_FIRQ_PENDING);
+
+//     // __asm__ volatile("mv %0, sp" : "=r" (NEORV32_CFS->REG[7]));
+//     // printf("(inner before) NEORV32_CFS->REG[SP_REG] ====================================: [%x]\n", NEORV32_CFS->REG[7]);
+
+    
+//     void (*task_pnt)(void);
+//     task_pnt = (void*)NEORV32_CFS->REG[INT_PC_FORWARD_REG]; 
+
+//     // save context, do not backup x0 and sp
+//     __asm__ volatile (
+//     #ifndef __riscv_32e
+//       "addi sp, sp, -30*4 \n"
+//     #else
+//       "addi sp, sp, -14*4 \n"
+//     #endif
+//       "sw x1,   0*4(sp) \n"
+//       "sw x3,   1*4(sp) \n"
+//       "sw x4,   2*4(sp) \n"
+//       "sw x5,   3*4(sp) \n"
+//       "sw x6,   4*4(sp) \n"
+//       "sw x7,   5*4(sp) \n"
+//       "sw x8,   6*4(sp) \n"
+//       "sw x9,   7*4(sp) \n"
+//       "sw x10,  8*4(sp) \n"
+//       "sw x11,  9*4(sp) \n"
+//       "sw x12, 10*4(sp) \n"
+//       "sw x13, 11*4(sp) \n"
+//       "sw x14, 12*4(sp) \n"
+//       "sw x15, 13*4(sp) \n"
+//     #ifndef __riscv_32e
+//       "sw x16, 14*4(sp) \n"
+//       "sw x17, 15*4(sp) \n"
+//       "sw x18, 16*4(sp) \n"
+//       "sw x19, 17*4(sp) \n"
+//       "sw x20, 18*4(sp) \n"
+//       "sw x21, 19*4(sp) \n"
+//       "sw x22, 20*4(sp) \n"
+//       "sw x23, 21*4(sp) \n"
+//       "sw x24, 22*4(sp) \n"
+//       "sw x25, 23*4(sp) \n"
+//       "sw x26, 24*4(sp) \n"
+//       "sw x27, 25*4(sp) \n"
+//       "sw x28, 26*4(sp) \n"
+//       "sw x29, 27*4(sp) \n"
+//       "sw x30, 28*4(sp) \n"
+//       "sw x31, 29*4(sp) \n"
+//     #endif
+//     );
+//     __asm__ volatile("mv %0, sp" : "=r" (NEORV32_CFS->REG[7]));
+//     // printf("(inner after) NEORV32_CFS->REG[SP_REG] ====================================: [%x]\n", NEORV32_CFS->REG[7]);
+
+
+//     (*task_pnt)();
+//   }
+
+//   // printf("(before) NEORV32_CFS->REG[SP_REG] ====================================: [%x]\n", NEORV32_CFS->REG[7]);
+
+//   NEORV32_CFS->REG[INT_FLAG_REG] = INT_FLAG_REG_SET;
+
+//   // printf("(after) NEORV32_CFS->REG[SP_REG] ====================================: [%x]\n", NEORV32_CFS->REG[7]);
+
+//   // restore context, do not restore x0 and sp
+//   __asm__ volatile("mv sp, %0" : : "r" (NEORV32_CFS->REG[7]));
+//   __asm__ volatile (
+//     "lw x1,   0*4(sp) \n"
+//     "lw x3,   1*4(sp) \n"
+//     "lw x4,   2*4(sp) \n"
+//     "lw x5,   3*4(sp) \n"
+//     "lw x6,   4*4(sp) \n"
+//     "lw x7,   5*4(sp) \n"
+//     "lw x8,   6*4(sp) \n"
+//     "lw x9,   7*4(sp) \n"
+//     "lw x10,  8*4(sp) \n"
+//     "lw x11,  9*4(sp) \n"
+//     "lw x12, 10*4(sp) \n"
+//     "lw x13, 11*4(sp) \n"
+//     "lw x14, 12*4(sp) \n"
+//     "lw x15, 13*4(sp) \n"
+//     #ifndef __riscv_32e
+//       "lw x16, 14*4(sp) \n"
+//       "lw x17, 15*4(sp) \n"
+//       "lw x18, 16*4(sp) \n"
+//       "lw x19, 17*4(sp) \n"
+//       "lw x20, 18*4(sp) \n"
+//       "lw x21, 19*4(sp) \n"
+//       "lw x22, 20*4(sp) \n"
+//       "lw x23, 21*4(sp) \n"
+//       "lw x24, 22*4(sp) \n"
+//       "lw x25, 23*4(sp) \n"
+//       "lw x26, 24*4(sp) \n"
+//       "lw x27, 25*4(sp) \n"
+//       "lw x28, 26*4(sp) \n"
+//       "lw x29, 27*4(sp) \n"
+//       "lw x30, 28*4(sp) \n"
+//       "lw x31, 29*4(sp) \n"
+//     #endif
+//     #ifndef __riscv_32e
+//       "addi sp, sp, +30*4 \n"
+//     #else
+//       "addi sp, sp, +14*4 \n"
+//     #endif
+//     // "ret              \n"
+//   );
+
+//   printf("Machine exception program counter[%x]\n", neorv32_cpu_csr_read(CSR_MEPC));
+//   printf(">>>>>EXIT MY_ISR<<<<<<*****************************************\n");
+//   printf("\n");
+
+// }
+
+void my_isr_SecureNeo(void *arg){
 
   // verbose = 1; --> for debugging
 
@@ -199,6 +447,9 @@ void my_isr(void *arg){
     #endif
     );
     __asm__ volatile("mv %0, sp" : "=r" (NEORV32_CFS->REG[7]));
+
+    printf("NEORV32_CFS->REG[SP_REG] ====================================: [%x]\n", NEORV32_CFS->REG[7]);
+
     //return;
 
   // if(latencyEnable)
@@ -242,10 +493,30 @@ void my_isr(void *arg){
     (*task_pnt)();
   }
 
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+  // printf("NEORV32_CFS->REG[INT_FLAG_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+
   NEORV32_CFS->REG[INT_FLAG_REG] = INT_FLAG_REG_SET;
 
+  // __asm__ volatile ("li t0, %[input_i]; jr t0" :  : [input_i] "i" (INT_PC_BACKWARD_REG));
+
+  // printf("NEORV32_CFS->REG[SP_REG] $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$: [%x]\n", NEORV32_CFS->REG[7]);
+
+
+  // printf("(after jump back to isr) NEORV32_CFS->REG[INT_FLAG_REG] ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^: [%x]\n", NEORV32_CFS->REG[INT_FLAG_REG]);
+
+  // printf("------------------------------------------------------> (before restore context, do not restore x0 and sp)");
+  
   // restore context, do not restore x0 and sp
   __asm__ volatile("mv sp, %0" : : "r" (NEORV32_CFS->REG[7]));
+  // printf("************************************************ finished restoring context, do not restore x0 and sp ************************************************\n");
   __asm__ volatile (
     "lw x1,   0*4(sp) \n"
     "lw x3,   1*4(sp) \n"
@@ -286,6 +557,8 @@ void my_isr(void *arg){
     #endif
    // "ret              \n"
   );
+
+  // NEORV32_CFS->REG[INT_FLAG_REG] = INT_FLAG_REG_SET;
 
   printf("\n>>>>>EXIT MY_ISR<<<<<<*****************************************\n");
   printf("Machine exception program counter[%x]\n", neorv32_cpu_csr_read(CSR_MEPC));
@@ -350,6 +623,8 @@ void main(void){
   // if(latencyEnable)
   //   timing_start();
   printf("START IN MAIN\n");
+
+  printf("TASK0: Current State [%u]\n", NEORV32_CFS->REG[TASK0_STATE_REG]);
 
   if(zephyr_init_timing){
     // set up the zephyr initialization timer
